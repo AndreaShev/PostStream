@@ -31,6 +31,7 @@ const API_ENDPOINTS = {
   POSTS: "/posts", // Конечная точка для получения постов
 };
 
+// Типовой объект
 //{"posts":[{"id":1,"title":"His mother...","body":"His mother had...","tags":["history","american","crime"],"reactions":{"likes":192,"dislikes":25},"views":305,"userId":121},{"id":2...],...,"total":251,"skip":0,"limit":30}
 
 // Переменные для пагинации
@@ -199,6 +200,22 @@ function setupBackToTopButton() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
+
+// Переключение темы
+const themeToggle = document.getElementById("themeToggle");
+
+themeToggle.addEventListener("click", () => {
+  const isDark = document.documentElement.classList.toggle("dark");
+
+  // Сохраняем тему в localStorage
+  localStorage.setItem("theme", isDark ? "dark" : "light");
+
+  // Меняем текст и ARIA-атрибуты для доступности
+  themeToggle.textContent = isDark
+    ? "Перейти на светлую тему"
+    : "Перейти на тёмную тему";
+  themeToggle.setAttribute("aria-pressed", isDark);
+});
 
 // Инициализация при загрузке DOM
 document.addEventListener("DOMContentLoaded", () => {
